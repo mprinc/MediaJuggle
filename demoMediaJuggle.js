@@ -11,13 +11,14 @@ var demo_type = "chunk_folder";
 
 switch(demo_type){
 case "reencode_folder":
-	// var folderName = process.argv[2] || 'data/lolita-eng';
-	var folderName = process.argv[2] || 'data/dr-zivago';
+	var folderName = process.argv[2] || '../data/lolita-eng';
+	// var folderName = process.argv[2] || 'data/dr-zivago';
 	var numberSetFolder = process.argv[3] || "/Users/sasha/Documents/data/development/mediaJuggle/data/infoSounds/sasha";
 	var listFileName = process.argv[4] || 'list.json';
 
 	mediaJuggle.init(folderName, listFileName).numberSetFolder(numberSetFolder).chunkLengthSec(60*7).indexAtTheStart(true);
 	var mediaFile = "01-17.mp3";
+	var mediaFile = "Lolita audiobook Part 1 Chapter 1.mp3";
 	mediaJuggle.mediaTransformation.getMediaParams(mediaFile, function(params){
 		var format = params.format;
 		format.acodec = "libmp3lame";
@@ -28,11 +29,11 @@ case "reencode_folder":
 	});
 	break;
 
-// node demoMediaJuggle.js data/dr-zivago list.json
-// node demoMediaJuggle.js data/lolita-eng list.json
+// node demoMediaJuggle.js ../data/dr-zivago list.json
+// node demoMediaJuggle.js ../data/lolita-eng list.json
 case "chunk_folder":
-	// var folderName = process.argv[2] || 'data/lolita-eng';
-	var folderName = process.argv[2] || 'data/dr-zivago';
+	var folderName = process.argv[2] || '../data/lolita-eng';
+	// var folderName = process.argv[2] || '../data/dr-zivago';
 	var listFileName = process.argv[3] || 'list.json';
 
 	// mediaJuggle.getMediaInfo(fileName, function(mediaInfo){
