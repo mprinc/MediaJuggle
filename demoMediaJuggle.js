@@ -7,18 +7,25 @@ var MediaJuggle = require("./mediaJuggle");
 var mediaJuggle = new MediaJuggle();
 
 // var demo_type = "reencode_folder";
-var demo_type = "chunk_folder";
+var demo_type = process.argv[2];
 
+// node demoMediaJuggle.js reencode ../data/prokleta-avlija ../infoSounds/sasha list.json
+// node demoMediaJuggle.js reencode ../data/rur-sr ../infoSounds/sasha list.json
+
+// node demoMediaJuggle.js chunk ../data/prokleta-avlija list.json
+// node demoMediaJuggle.js chunk ../data/rur-sr list.json
 switch(demo_type){
-case "reencode_folder":
-	var folderName = process.argv[2] || '../data/lolita-eng';
+case "reencode": // reencode_folder
+	var folderName = process.argv[3] || '../data/lolita-eng';
 	// var folderName = process.argv[2] || 'data/dr-zivago';
-	var numberSetFolder = process.argv[3] || "/Users/sasha/Documents/data/development/mediaJuggle/data/infoSounds/sasha";
-	var listFileName = process.argv[4] || 'list.json';
+	var numberSetFolder = process.argv[4] || "/Users/sasha/Documents/data/development/mediaJuggle/data/infoSounds/sasha";
+	var listFileName = process.argv[5] || 'list.json';
 
 	mediaJuggle.init(folderName, listFileName).numberSetFolder(numberSetFolder).chunkLengthSec(60*7).indexAtTheStart(true);
 	var mediaFile = "01-17.mp3";
 	var mediaFile = "Lolita audiobook Part 1 Chapter 1.mp3";
+	var mediaFile = "Иво Андрић - ПРОКЛЕТА АВЛИЈА.mp3";
+	var mediaFile = "Карел Чапек - РУР - РОСОМОВИ УНИВЕРЗАЛНИ РОБОТИ.mp3";
 	mediaJuggle.mediaTransformation.getMediaParams(mediaFile, function(params){
 		var format = params.format;
 		format.acodec = "libmp3lame";
@@ -31,10 +38,9 @@ case "reencode_folder":
 
 // node demoMediaJuggle.js ../data/dr-zivago list.json
 // node demoMediaJuggle.js ../data/lolita-eng list.json
-case "chunk_folder":
-	var folderName = process.argv[2] || '../data/lolita-eng';
-	// var folderName = process.argv[2] || '../data/dr-zivago';
-	var listFileName = process.argv[3] || 'list.json';
+case "chunk": // chunk_folder
+	var folderName = process.argv[3] || '../data/lolita-eng';
+	var listFileName = process.argv[4] || 'list.json';
 
 	// mediaJuggle.getMediaInfo(fileName, function(mediaInfo){
 	// 	console.log("fileName '%s' length: %s sec", mediaInfo.fileName(), mediaInfo.lengthSec());
